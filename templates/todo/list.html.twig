@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container-fluid">
+        <header class="header">
+            <h1 class="header__title">To do app!</h1>
+        </header>
+    </div>
+    <div class="container">
+        {{ form_start(form, {attr: {class: 'form'} }) }}
+            {{ form_label(form.task, 'Add task', {'label_attr': {'class': 'form__label'}}) }}
+        {{ form_end(form) }}
+    </div>
+    <div class="container">
+        <div class="wrapper-list">
+            <ul class="list list--todo">
+                To do:
+                {% for task in tasks %}
+                    {% if  task.todo %}
+                        <li class="list__item">
+                            {{ task.content }}
+                            <button class="btn">Move to in progress</button>
+                            <button class="btn btn--danger">DELETE</button>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul class="list list--wip">
+                Work in progress:
+                {% for task in tasks %}
+                    {% if  task.todo %}
+                        <li class="list__item">
+                            {{ task.content }}
+                            <button class="btn btn">Move to do</button>
+                            <button class="btn btn">Move to done</button>
+                            <button class="btn btn--danger">DELETE</button>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul class="list list--done">
+                Done:
+                {% for task in tasks %}
+                    {% if  task.todo %}
+                        <li class="list__item">
+                            {{ task.content }}
+                            <button class="btn btn">Move to in progress</button>
+                            <button class="btn btn--danger">DELETE</button>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
