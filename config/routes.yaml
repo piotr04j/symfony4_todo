@@ -1,3 +1,8 @@
 index:
     path: /
     controller: App\Controller\TodoController::index
+form_handler:
+    methods: POST
+    path: /addtask
+    controller: App\Controller\TodoController::formHandler
+    

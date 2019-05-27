@@ -1,6 +1,31 @@
 require('../css/app.css');
+const $ = require('jquery');
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to require it.
-// const $ = require('jquery');
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+class TaskForm {
+  constructor (formSelector) {
+    this._form = formSelector
+  }
+
+
+  returnForm(){
+    return this._inputUser
+  }
+
+  submitForm() {
+
+    $(this._form ).submit((e) => {
+      e.preventDefault()
+      $.post('/addtask', 'task=' +this._form.find('input').val(), (res) =>{
+        console.log(res)
+      })
+
+    })
+  }
+}
+
+const form = new TaskForm($('.form'))
+
+form.submitForm()
