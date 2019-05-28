@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\AddTask;
+use App\Service\TaskHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,7 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class TodoController extends AbstractController
 {
-    public function index(Request $request)
+
+    public function index()
     {
 
         $form = $this->createForm(AddTask::class);
@@ -26,29 +28,9 @@ class TodoController extends AbstractController
 
     }
 
-    /**
-     * @param Response $response
-     */
-    public function formHandler (Response $response)
+    public function formHandler (Request $request, TaskHandler $taskHandler)
     {
-
-//        $form->handleRequest($request);
-//        if ($form->isSubmitted()) {
-//            $userData = $form->getData();
-//            $task = new Task();
-//            $task->setContent($userData['task']);
-//            $task->setTodo(true);
-//            $task->setWip(false);
-//            $task->setDone(false);
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($task);
-//            $em->flush();
-//        }
-//        $value = $request->request->get('task');
-        $response->setContent('Hello World ');
-        $response->setStatusCode(Response::HTTP_OK);
-        $response->headers->set('Content-Type', 'text/html');
-        $response->send();
-
+        $newTask = $request->request->get('task');
+        return $taskHandler->addTask($newTask);
     }
 }
