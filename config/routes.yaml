@@ -5,4 +5,7 @@ form_handler:
     methods: POST
     path: /addtask
     controller: App\Controller\TodoController::formHandler
+delete_task:
+    path: /delete/{$id}
+    controller: App\Controller\TodoController::deleteTask
     

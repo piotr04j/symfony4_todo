@@ -4,8 +4,8 @@
 namespace App\Service;
 
 use App\Entity\Task;
+use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class TaskHandler extends AbstractController
@@ -21,10 +21,14 @@ class TaskHandler extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
-            $response = new Response();
-            $response->setContent('dodano: '.$newTask);
-            $response->setStatusCode(Response::HTTP_OK);
-            $response->headers->set('Content-Type', 'text/plain');
-            return $response;
+    }
+
+    public function deleteTask(string $id)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $task = $em->getRepository(Task::class)
+                ->findBy(["id" => $id]);
+            $em->remove($task[0]);
+            $em->flush();
     }
 }

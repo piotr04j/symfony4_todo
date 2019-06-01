@@ -20,7 +20,7 @@
                         <li class="list__item">
                             {{ task.content }}
                             <button class="btn">Move to in progress</button>
-                            <button class="btn btn--danger">DELETE</button>
+                            <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -33,7 +33,7 @@
                             {{ task.content }}
                             <button class="btn btn">Move to do</button>
                             <button class="btn btn">Move to done</button>
-                            <button class="btn btn--danger">DELETE</button>
+                            <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -44,8 +44,8 @@
                     {% if  task.todo %}
                         <li class="list__item">
                             {{ task.content }}
-                            <button class="btn btn">Move to in progress</button>
-                            <button class="btn btn--danger">DELETE</button>
+                            <a class="btn btn">Move to in progress</a>
+                            <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
                         </li>
                     {% endif %}
                 {% endfor %}
