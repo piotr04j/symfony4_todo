@@ -1,11 +1,16 @@
 index:
     path: /
     controller: App\Controller\TodoController::index
-form_handler:
-    methods: POST
-    path: /addtask
-    controller: App\Controller\TodoController::formHandler
 delete_task:
     path: /delete/{$id}
     controller: App\Controller\TodoController::deleteTask
+move_wip:
+    path: /wip/{$id}
+    controller: App\Controller\TodoController::moveToWIP
+move_done:
+    path: /done/{$id}
+    controller: App\Controller\TodoController::moveToDone
+move_todo:
+    path: /todo/{$id}
+    controller: App\Controller\TodoController::moveToToDo
     

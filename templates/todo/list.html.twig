@@ -19,7 +19,7 @@
                     {% if  task.todo %}
                         <li class="list__item">
                             {{ task.content }}
-                            <button class="btn">Move to in progress</button>
+                            <a href="{{ path('move_wip',{'id': task.id} ) }}" class="btn btn">Move to in progress</a>
                             <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
                         </li>
                     {% endif %}
@@ -28,11 +28,11 @@
             <ul class="list list--wip">
                 Work in progress:
                 {% for task in tasks %}
-                    {% if  task.todo %}
+                    {% if  task.wip %}
                         <li class="list__item">
                             {{ task.content }}
-                            <button class="btn btn">Move to do</button>
-                            <button class="btn btn">Move to done</button>
+                            <a href="{{ path('move_todo',{'id': task.id} ) }}" class="btn btn">Move to do</a>
+                            <a href="{{ path('move_done',{'id': task.id} ) }}" class="btn btn">Move to done</a>
                             <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
                         </li>
                     {% endif %}
@@ -41,10 +41,10 @@
             <ul class="list list--done">
                 Done:
                 {% for task in tasks %}
-                    {% if  task.todo %}
+                    {% if  task.done %}
                         <li class="list__item">
                             {{ task.content }}
-                            <a class="btn btn">Move to in progress</a>
+                            <a href="{{ path('move_wip',{'id': task.id} ) }}" class="btn btn">Move to in progress</a>
                             <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
                         </li>
                     {% endif %}
