@@ -41,18 +41,29 @@ html {
 .form__label {
     font-size: 2rem;
 }
+.form__submit {
+    box-shadow: 2px 2px 2px rgba(0,0,0,.5);
+    outline: none;
+}
 .wrapper-list {
     display: flex;
     padding: 2rem 2rem;
     justify-content: space-between;
+    background: darkgray;
+    border: 1px solid black;
+    border-radius: 10px;
 }
 .list {
     font-size: 1.8rem;
-    list-style: disc;
+    list-style: decimal;
+    flex-basis: 100%;
+    margin: 0 2rem;
 }
 .list__item {
     font-size: 1.6rem;
     margin: 1rem 0;
+    width: 100%;
+    padding: 1rem;
 }
 .list__item:first-of-type {
     margin-top: 2rem;
@@ -60,10 +71,28 @@ html {
 .list__item:nth-of-type(even){
     background-color: #C9C9C9;
 }
+.list__buttons {
+    display: flex;
+    justify-content: center;
+}
+.form__submit,
 .btn {
+    display: block;
     background: grey;
     border: .1rem solid black;
     border-radius: .5rem;
     padding: .5rem;
-    margin: 0 .5rem;
+    margin: 1rem .5rem;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+    transition: .4s;
+}
+
+.form__submit,
+.btn:hover {
+    background: darkgray;
+}
+.form__submit:focus {
+    box-shadow: 0 0 0;
 }

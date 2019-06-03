@@ -5,6 +5,7 @@ namespace App\Tests;
 
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Util\Test;
 
 class SomeTest extends TestCase
 {
@@ -13,5 +14,6 @@ class SomeTest extends TestCase
         $test = 2;
         $test *= $test;
         $x = $test;
+        Test::
     }
 }

@@ -19,8 +19,10 @@
                     {% if  task.todo %}
                         <li class="list__item">
                             {{ task.content }}
-                            <a href="{{ path('move_wip',{'id': task.id} ) }}" class="btn btn">Move to in progress</a>
-                            <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
+                            <div class="list__buttons">
+                                <a href="{{ path('move_wip',{'id': task.id} ) }}" class="btn btn">Move to in progress</a>
+                                <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
+                            </div>
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -31,9 +33,11 @@
                     {% if  task.wip %}
                         <li class="list__item">
                             {{ task.content }}
-                            <a href="{{ path('move_todo',{'id': task.id} ) }}" class="btn btn">Move to do</a>
-                            <a href="{{ path('move_done',{'id': task.id} ) }}" class="btn btn">Move to done</a>
-                            <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
+                            <div class="list__buttons">
+                                <a href="{{ path('move_todo',{'id': task.id} ) }}" class="btn btn">Move to do</a>
+                                <a href="{{ path('move_done',{'id': task.id} ) }}" class="btn btn">Move to done</a>
+                                <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
+                            </div>
                         </li>
                     {% endif %}
                 {% endfor %}
@@ -44,8 +48,10 @@
                     {% if  task.done %}
                         <li class="list__item">
                             {{ task.content }}
-                            <a href="{{ path('move_wip',{'id': task.id} ) }}" class="btn btn">Move to in progress</a>
-                            <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
+                            <div class="list__buttons">
+                                <a href="{{ path('move_wip',{'id': task.id} ) }}" class="btn btn">Move to in progress</a>
+                                <a href="{{ path('delete_task',{'id': task.id} ) }}" class="btn btn--danger">DELETE</a>
+                            </div>
                         </li>
                     {% endif %}
                 {% endfor %}
