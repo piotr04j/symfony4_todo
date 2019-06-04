@@ -4,7 +4,6 @@
 namespace App\Service;
 
 use App\Entity\Task;
-use App\Repository\TaskRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -32,7 +31,7 @@ class TaskHandler extends AbstractController
             $em->flush();
     }
 
-    public function  moveToWIP(string $id): void
+    public function moveToWIP(string $id): void
     {
         $em = $this->getDoctrine()->getManager();
         $task = $em->getRepository(Task::class)

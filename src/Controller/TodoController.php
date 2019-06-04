@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\AddTask;
 use App\Service\TaskHandler;
-use http\Env\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -35,7 +34,6 @@ class TodoController extends AbstractController
         ]);
 
     }
-
 
     public function deleteTask(Request $request, TaskHandler $taskHandler)
     {
