@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TaskHandler extends AbstractController
 {
 
-    public function addTask(string $newTask): void
+    public function addTask(string $newTask): Task
     {
             $task = new Task();
             $task->setContent($newTask);
@@ -20,6 +20,7 @@ class TaskHandler extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($task);
             $em->flush();
+            return $task;
     }
 
     public function deleteTask(string $id): void

@@ -6,15 +6,14 @@ namespace App\Tests;
 
 use App\Controller\TodoController;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 
-class TodoTest extends WebTestCase
+class TodoTest extends TestCase
 {
     /**
      * @test
      */
-    public function createFormTest()
+    public function indexTest()
     {
         $instanceTodo = new TodoController();
 
