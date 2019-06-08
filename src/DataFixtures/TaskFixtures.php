@@ -6,6 +6,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Task;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class TaskFixtures extends Fixture
@@ -38,5 +39,11 @@ class TaskFixtures extends Fixture
         $manager->persist($taskDone);
 
         $manager->flush();
+    }
+
+    public function clearDB(ObjectManager $manager)
+    {
+        $purger = new ORMPurger($manager);
+        $purger->purge();
     }
 }
