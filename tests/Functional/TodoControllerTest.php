@@ -102,7 +102,6 @@ class TodoControllerTest extends WebTestCase
         $this->assertEquals(1, $crawler->filter('li')->count());
         $this->assertEquals(0, $crawler->filterXPath('//li[contains(text(),\''. TaskFixtures::CONTENT_WIP  .'\')]')->count());
 
-
         $task = $crawler
             ->filterXPath('//li[contains(text(),\''. TaskFixtures::CONTENT_DONE .'\')]//a[contains(text(),\'DELETE\')]')
             ->link();
@@ -111,6 +110,58 @@ class TodoControllerTest extends WebTestCase
         $crawler = $this->client->followRedirect();
 
         $this->assertEquals(0, $crawler->filter('li')->count());
+    }
+
+    /**
+     * @test
+     */
+    public function moveTaskToWIP()
+    {
+        $crawler = $this->client->request('GET', '/');
+
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--todo\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--wip\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--done\')]//li')->count());
+
+        $taskToMove = $crawler
+            ->filterXPath('//li[contains(text(),\''. TaskFixtures::CONTENT_TODO .'\')]//a[contains(text(),\'Move to in progress\')]')
+            ->link();
+        $this->client->click($taskToMove);
+        $crawler = $this->client->followRedirect();
+
+        $this->assertEquals(0, $crawler->filterXPath('//ul[contains(@class, \'list--todo\')]//li')->count());
+        $this->assertEquals(2, $crawler->filterXPath('//ul[contains(@class, \'list--wip\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--done\')]//li')->count());
+
+        $taskToMove = $crawler
+            ->filterXPath('//li[contains(text(),\''. TaskFixtures::CONTENT_TODO .'\')]//a[contains(text(),\'Move to done\')]')
+            ->link();
+        $this->client->click($taskToMove);
+        $crawler = $this->client->followRedirect();
+
+        $this->assertEquals(0, $crawler->filterXPath('//ul[contains(@class, \'list--todo\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--wip\')]//li')->count());
+        $this->assertEquals(2, $crawler->filterXPath('//ul[contains(@class, \'list--done\')]//li')->count());
+
+        $taskToMove = $crawler
+            ->filterXPath('//li[contains(text(),\''. TaskFixtures::CONTENT_TODO .'\')]//a[contains(text(),\'Move to in progress\')]')
+            ->link();
+        $this->client->click($taskToMove);
+        $crawler = $this->client->followRedirect();
+
+        $this->assertEquals(0, $crawler->filterXPath('//ul[contains(@class, \'list--todo\')]//li')->count());
+        $this->assertEquals(2, $crawler->filterXPath('//ul[contains(@class, \'list--wip\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--done\')]//li')->count());
+
+        $taskToMove = $crawler
+            ->filterXPath('//li[contains(text(),\''. TaskFixtures::CONTENT_TODO .'\')]//a[contains(text(),\'Move to do\')]')
+            ->link();
+        $this->client->click($taskToMove);
+        $crawler = $this->client->followRedirect();
+
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--todo\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--wip\')]//li')->count());
+        $this->assertEquals(1, $crawler->filterXPath('//ul[contains(@class, \'list--done\')]//li')->count());
 
     }
 }
